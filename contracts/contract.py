@@ -44,9 +44,13 @@ class Probe:
     digests: str
     observed_at: u256
 
-class QuietProof(gl.Contract):
+class Contract(gl.Contract):
     probes: TreeMap[str, Probe]
     ids: DynArray[str]
+    count: u256
+
+    def __init__(self):
+        self.count = u256(0)
 
     def _get(self, probe_id):
         key = ident(probe_id)
@@ -101,7 +105,7 @@ class QuietProof(gl.Contract):
         urls = [item[0] for item in parsed]; origins = [item[1] for item in parsed]; start = int(not_before)
         if key in self.probes or len(clip(subject, 500)) < 12 or len(clip(signal_definition, 700)) < 12 or len(urls) < 2 or len(urls) > 5 or len(set(origins)) != len(origins) or start < now() or start > now() + 2592000:
             raise gl.vm.UserError("[EXPECTED] unique probe, bounded future observation, and independent sources required")
-        self.probes[key] = Probe(gl.message.sender_address, clip(subject, 500), clip(signal_definition, 700), json.dumps(urls), json.dumps(origins), u256(start), "WAITING", "[]", "[]", u256(0)); self.ids.append(key)
+        self.probes[key] = Probe(gl.message.sender_address, clip(subject, 500), clip(signal_definition, 700), json.dumps(urls), json.dumps(origins), u256(start), "WAITING", "[]", "[]", u256(0)); self.ids.append(key); self.count += u256(1)
 
     @gl.public.write
     def observe(self, probe_id: str) -> None:
@@ -123,5 +127,5 @@ class QuietProof(gl.Contract):
     @gl.public.view
     def get_probes_page(self, offset: u256, limit: u256) -> dict:
         start = int(offset); size = min(int(limit), 20)
-        return {"items": [self.get_probe(self.ids[i]) for i in range(start, min(start + size, len(self.ids)))], "total": len(self.ids)}
+        return {"items": [self.get_probe(self.ids[i]) for i in range(start, min(start + size, int(self.count)))], "total": int(self.count)}
 
