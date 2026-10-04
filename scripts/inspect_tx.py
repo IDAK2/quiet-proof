@@ -23,5 +23,9 @@ print(json.dumps({
     "status": receipt.get("status_name"),
     "consensus": receipt.get("result_name"),
     "execution": leader.get("execution_result"),
+    "receiptKeys": sorted(receipt.keys()),
+    "data": receipt.get("data"),
+    "to": receipt.get("to_address"),
+    "from": receipt.get("from_address"),
     "leader": leader,
 }, default=str))

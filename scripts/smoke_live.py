@@ -6,6 +6,21 @@ from pathlib import Path
 
 from genlayer_py import create_account, create_client
 from genlayer_py.chains import studionet
+from genlayer_py.contracts import actions as contract_actions
+
+
+def studio_calldata(method=None, args=None, kwargs=None):
+    value = {}
+    if method is not None:
+        value["method"] = method
+    if args:
+        value["args"] = args
+    if kwargs:
+        value["kwargs"] = kwargs
+    return value
+
+
+contract_actions.make_calldata_object = studio_calldata
 
 
 ROOT = Path(__file__).parents[1]
@@ -13,7 +28,7 @@ text = (ROOT.parents[3] / "accounts.env").read_text()
 key = re.search(r'^ACCOUNT_7_GENLAYER_PRIVATE_KEY\s*=\s*"?([^"\r\n]+)', text, re.M).group(1).strip()
 client = create_client(chain=studionet, account=create_account(account_private_key=key))
 address = sys.argv[1]
-probe_id = "QP-LIVE-20261004"
+probe_id = "QP-LIVE-20261004B"
 args = [
     probe_id,
     "Public availability of two independent developer infrastructure status pages",

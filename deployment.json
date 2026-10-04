@@ -1,0 +1,36 @@
+{
+  "network": "GenLayer StudioNet",
+  "wallet": "0xc8e8f5B7d61Da6eD160f474592627D65728b516e",
+  "contractAddress": "0x7651Ad374Dd9Cc71Fa3FE72972F970E13372c328",
+  "sourcePath": "contracts/contract.py",
+  "sourceCommit": "3d4bc781bbf5d84aac1b748e0630459ae4aa4664",
+  "deployment": {
+    "transaction": "0x482ff4cf7f040513cdfee2833270a1b4406ab6e85ec58c4e1e9acfeac51b6f36",
+    "consensus": "MAJORITY_AGREE",
+    "execution": "SUCCESS"
+  },
+  "liveEvidence": [
+    {
+      "operation": "open_probe",
+      "transaction": "0x49ff70eaaf82464b64b89c1880f500c704fde9cb7afe44c98c5cc96d840fb6de",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS"
+    },
+    {
+      "operation": "observe",
+      "transaction": "0x5d62a1afcdfc0b0978d3f301d14fb9450812c8de9bccf98b054b842ad3dfabd9",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "record": "QP-CORE-20261004C",
+      "finalState": "ABSENT",
+      "sourceDigests": [
+        "043642dc13aff1f5764229ddf6e7b35adce634e63875ee15925928967554cde6",
+        "a6ca55fe9dd9fe482804fc61ffcddead5e23ab42c318b8bac868bb51c98736d3"
+      ]
+    }
+  ],
+  "verification": {
+    "genvmLint": "PASS (3 checks)",
+    "directSuite": "13 scenarios authored across both contracts; local runner blocked before contract load by the installed Python 3.13 stdin decoder incompatibility"
+  }
+}

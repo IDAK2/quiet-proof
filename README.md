@@ -29,3 +29,9 @@ python -m pytest -q
 
 The direct suite covers all-absent, one-present, ambiguous, duplicate-origin, early-call, forged-label, forged-digest, authorization, cancellation, and duplicate-ID paths.
 
+## StudioNet field note
+
+The canonical deployment is `0x7651Ad374Dd9Cc71Fa3FE72972F970E13372c328`. Live record `QP-CORE-20261004C` reached `ABSENT` after validator agreement over the GitHub Status and Cloudflare Status JSON endpoints. Those endpoints are used because their response bytes remain stable during a consensus round; animated HTML status pages are intentionally unsuitable for digest agreement.
+
+Exact deployment and lifecycle transaction hashes are recorded in [`deployment.json`](deployment.json).
+
